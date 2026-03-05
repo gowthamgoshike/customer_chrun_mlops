@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 import pandas as pd
-import mlflow.pyfunc
-
+#import mlflow.pyfunc
+import pickle
 app = FastAPI(title="Customer Churn Prediction API")
 
 # Load MLflow model
-model = mlflow.pyfunc.load_model("runs:/19d8e7f4ae0448c78e8b6d5ca9c60211/model")
+#model = mlflow.pyfunc.load_model("runs:/19d8e7f4ae0448c78e8b6d5ca9c60211/model")
 
+with open("models/churn_model.pkl", "rb") as f:
+    model = pickle.load(f)
 
 @app.get("/")
 def home():
